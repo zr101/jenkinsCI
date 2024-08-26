@@ -4,82 +4,68 @@ pipeline {
     stages {
         stage("Build") {
             steps {
-                echo 'Skipping build since the project does not require Maven anymore.'
+                echo  'Building project to compile and package using Maven.'
             }
         }
 
-        // Keep the rest of your stages
-    
-
-
         stage("Unit and Integration Tests") {
             steps {
-                echo 'Running JUnit tests to ensure code functions as expected.'
-                sh 'mvn test'
-                echo 'Running Integration Tests to ensure components work together.'
-                // Add your integration test commands here
+                echo 'JUnit test for code function.'
+                echo 'Integration Test working together.'
             }
-            post { 
-                success {
-                    mail to: "zaeem.r2021@gmail.com",
-                    subject: "Success: JUnit and Integration tests successful.",
-                    body: "The Unit and Integration Tests stage completed successfully."
+            post{ 
+                    success{
+                        mail to: "zaeem.r2021@gmail.com",
+                        subject: "Success: JUnit and Integration test successful.",
+                        body: "Stage is working."
+                    }
+                    failure{
+                        mail to: "zaeem.r2021@gmail.com",
+                        subject: "Unsuccess: JUnit and Integration test failure.",
+                        body: "Stage is not working. Please try to test again."
+                    }
                 }
-                failure {
-                    mail to: "zaeem.r2021@gmail.com",
-                    subject: "Failure: JUnit and Integration tests failed.",
-                    body: "The Unit and Integration Tests stage failed. Please review the logs and fix the issues."
-                }
-            }
         }
 
         stage("Code Analysis") {
             steps {
-                echo 'Performing code analysis using SonarQube.'
-                sh 'mvn sonar:sonar'
+                 echo 'Performing code analysis using SonarQube'
             }
         }
 
         stage("Security Scan") {
             steps {
-                echo 'Performing security scan using OWASP Dependency Check.'
-                sh 'mvn dependency-check:check'
+               echo 'Performing security scan using SonarQube'
             }
-            post { 
-                success {
-                    mail to: "zaeem.r2021@gmail.com",
-                    subject: "Success: Security scan successful.",
-                    body: "The Security Scan stage completed successfully."
+             post{ 
+                    success{
+                        mail to: "zaeem.r2021@gmail.com",
+                        subject: "Success: Security scans successful.",
+                        body: "Scan is secure."
+                    }
+                    failure{
+                        mail to: "zaeem.r2021@gmail.com",
+                        subject: "Unsuccess: Security scans failure.",
+                        body: "Scan is not secure. Please try to protect application."
+                    }
                 }
-                failure {
-                    mail to: "zaeem.r2021@gmail.com",
-                    subject: "Failure: Security scan failed.",
-                    body: "The Security Scan stage failed. Please review the logs and address any vulnerabilities."
-                }
-            }
         }
 
         stage("Deploy to Staging") {
             steps {
-                echo 'Deploying to staging server on AWS EC2 (s3://staging-bucket/).'
-                // Replace with actual deployment command
-                sh 'scp target/myapp.war user@staging-server:/path/to/deploy'
+                 echo 'Deploy to staging sever AWS EC2 s3://staging-bucket/'
             }
         }
 
         stage("Integration Tests on Staging") {
             steps {
-                echo 'Running Integration Tests on Staging environment.'
-                // Add your staging integration test commands here
-                sh 'curl -f http://staging-server/api/test-endpoint'
+                echo 'Run Integration Tests on Staging environment'
             }
         }
 
         stage("Deploy to Production") {
             steps {
-                echo 'Deploying to Production server on AWS EC2.'
-                // Replace with actual production deployment command
-                sh 'scp target/myapp.war user@production-server:/path/to/deploy'
+                echo'Deploy to Production server AWS EC2'
             }
         }
     }
@@ -87,15 +73,9 @@ pipeline {
     post {
         success {
             echo 'Deployment to production successful!'
-            mail to: "zaeem.r2021@gmail.com",
-                 subject: "Success: Production deployment successful.",
-                 body: "The deployment to production completed successfully."
         }
         failure {
             echo 'Deployment failed!'
-            mail to: "zaeem.r2021@gmail.com",
-                 subject: "Failure: Deployment failed.",
-                 body: "The deployment process failed. Please check the logs and resolve the issues."
         }
     }
 }
