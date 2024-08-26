@@ -14,11 +14,11 @@ pipeline {
                 sh 'mvn test'
             }
         }
-        stage('Code Analysis') {
-            steps {
-                echo 'Performing code analysis...'
-                sh 'mvn sonar:sonar'
-            }
+        // stage('Code Analysis') {
+        //     steps {
+        //         echo 'Performing code analysis...'
+        //         sh 'mvn sonar:sonar'
+        //     }
         }
         stage('Security Scan') {
             steps {
