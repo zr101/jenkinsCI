@@ -46,16 +46,16 @@ pipeline {
         }
     }
 
-    post {
-        success {
-            mail to: 'user@example.com',
-                 subject: "Jenkins Pipeline Successful: ${currentBuild.fullDisplayName}",
-                 body: "The pipeline has completed successfully. \n\nCheck the full logs at: ${env.BUILD_URL}console"
-        }
-        failure {
-            mail to: 'user@example.com',
-                 subject: "Jenkins Pipeline Failed: ${currentBuild.fullDisplayName}",
-                 body: "The pipeline has failed. Please check the logs at: ${env.BUILD_URL}console"
-        }
-    }
+    // post {
+    //     success {
+    //         mail to: 'zaeem.r2021@gmail.com',
+    //              subject: "Jenkins Pipeline Successful: ${currentBuild.fullDisplayName}",
+    //              body: "The pipeline has completed successfully. \n\nCheck the full logs at: ${env.BUILD_URL}console"
+    //     }
+    //     failure {
+    //         mail to: 'zaeem.r2021@gmail.com.com',
+    //              subject: "Jenkins Pipeline Failed: ${currentBuild.fullDisplayName}",
+    //              body: "The pipeline has failed. Please check the logs at: ${env.BUILD_URL}console"
+    //     }
+    // }
 }
