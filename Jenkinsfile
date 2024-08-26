@@ -13,18 +13,18 @@ pipeline {
                 echo 'JUnit test for code function.'
                 echo 'Integration Test working together.'
             }
-            post{ 
-                    success{
-                        mail to: "zaeem.r2021@gmail.com",
-                        subject: "Success: JUnit and Integration test successful.",
-                        body: "Stage is working."
-                    }
-                    failure{
-                        mail to: "zaeem.r2021@gmail.com",
-                        subject: "Unsuccess: JUnit and Integration test failure.",
-                        body: "Stage is not working. Please try to test again."
-                    }
-                }
+            // post{ 
+            //         success{
+            //             mail to: "zaeem.r2021@gmail.com",
+            //             subject: "Success: JUnit and Integration test successful.",
+            //             body: "Stage is working."
+            //         }
+            //         failure{
+            //             mail to: "zaeem.r2021@gmail.com",
+            //             subject: "Unsuccess: JUnit and Integration test failure.",
+            //             body: "Stage is not working. Please try to test again."
+            //         }
+            //     }
         }
 
         stage("Code Analysis") {
