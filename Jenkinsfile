@@ -4,10 +4,13 @@ pipeline {
     stages {
         stage("Build") {
             steps {
-                echo 'Building project to compile and package using Maven.'
-                sh 'mvn clean package'
+                echo 'Skipping build since the project does not require Maven anymore.'
             }
         }
+
+        // Keep the rest of your stages
+    
+
 
         stage("Unit and Integration Tests") {
             steps {
