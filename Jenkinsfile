@@ -14,22 +14,22 @@ pipeline {
                 echo 'Integration Test working together.'
             }
             // post{ 
-            //         success{
-            //             mail to: "zaeem.r2021@gmail.com",
-            //             subject: "Success: JUnit and Integration test successful.",
-            //             body: "Stage is working."
-            //         }
-            //         failure{
-            //             mail to: "zaeem.r2021@gmail.com",
-            //             subject: "Unsuccess: JUnit and Integration test failure.",
-            //             body: "Stage is not working. Please try to test again."
-            //         }
+            //     success{
+            //         mail to: "zaeem.r2021@gmail.com",
+            //         subject: "Success: JUnit and Integration test successful.",
+            //         body: "Stage is working."
             //     }
+            //     failure{
+            //         mail to: "zaeem.r2021@gmail.com",
+            //         subject: "Unsuccess: JUnit and Integration test failure.",
+            //         body: "Stage is not working. Please try to test again."
+            //     }
+            // }
         }
 
         stage("Code Analysis") {
             steps {
-                 echo 'Performing code analysis using SonarQube'
+                echo 'Performing code analysis using SonarQube'
             }
         }
 
@@ -37,23 +37,23 @@ pipeline {
             steps {
                echo 'Performing security scan using SonarQube'
             }
-             post{ 
-                    success{
-                        mail to: "zaeem.r2021@gmail.com",
-                        subject: "Success: Security scans successful.",
-                        body: "Scan is secure."
-                    }
-                    failure{
-                        mail to: "zaeem.r2021@gmail.com",
-                        subject: "Unsuccess: Security scans failure.",
-                        body: "Scan is not secure. Please try to protect application."
-                    }
-                }
+            // post{ 
+            //     success{
+            //         mail to: "zaeem.r2021@gmail.com",
+            //         subject: "Success: Security scans successful.",
+            //         body: "Scan is secure."
+            //     }
+            //     failure{
+            //         mail to: "zaeem.r2021@gmail.com",
+            //         subject: "Unsuccess: Security scans failure.",
+            //         body: "Scan is not secure. Please try to protect application."
+            //     }
+            // }
         }
 
         stage("Deploy to Staging") {
             steps {
-                 echo 'Deploy to staging sever AWS EC2 s3://staging-bucket/'
+                echo 'Deploy to staging server AWS EC2 s3://staging-bucket/'
             }
         }
 
@@ -65,7 +65,7 @@ pipeline {
 
         stage("Deploy to Production") {
             steps {
-                echo'Deploy to Production server AWS EC2'
+                echo 'Deploy to Production server AWS EC2'
             }
         }
     }
