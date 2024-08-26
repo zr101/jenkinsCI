@@ -14,12 +14,15 @@ pipeline {
                 sh 'mvn test'
             }
         }
-        // stage('Code Analysis') {
-        //     steps {
-        //         echo 'Performing code analysis...'
-        //         sh 'mvn sonar:sonar'
-        //     }
+        // Uncomment the following section if you want to enable code analysis
+        /*
+        stage('Code Analysis') {
+            steps {
+                echo 'Performing code analysis...'
+                sh 'mvn sonar:sonar'
+            }
         }
+        */
         stage('Security Scan') {
             steps {
                 echo 'Performing security scan...'
@@ -46,16 +49,19 @@ pipeline {
         }
     }
 
-    // post {
-    //     success {
-    //         mail to: 'zaeem.r2021@gmail.com',
-    //              subject: "Jenkins Pipeline Successful: ${currentBuild.fullDisplayName}",
-    //              body: "The pipeline has completed successfully. \n\nCheck the full logs at: ${env.BUILD_URL}console"
-    //     }
-    //     failure {
-    //         mail to: 'zaeem.r2021@gmail.com.com',
-    //              subject: "Jenkins Pipeline Failed: ${currentBuild.fullDisplayName}",
-    //              body: "The pipeline has failed. Please check the logs at: ${env.BUILD_URL}console"
-    //     }
-    // }
-
+    // Uncomment the following section if you want to enable email notifications
+    /*
+    post {
+        success {
+            mail to: 'zaeem.r2021@gmail.com',
+                 subject: "Jenkins Pipeline Successful: ${currentBuild.fullDisplayName}",
+                 body: "The pipeline has completed successfully. \n\nCheck the full logs at: ${env.BUILD_URL}console"
+        }
+        failure {
+            mail to: 'zaeem.r2021@gmail.com',
+                 subject: "Jenkins Pipeline Failed: ${currentBuild.fullDisplayName}",
+                 body: "The pipeline has failed. Please check the logs at: ${env.BUILD_URL}console"
+        }
+    }
+    */
+}
