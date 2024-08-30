@@ -4,68 +4,79 @@ pipeline {
     stages {
         stage("Build") {
             steps {
-                echo  'Building project to compile and package using Maven.'
+                echo 'Building project to compile and package using Maven.'
             }
         }
 
         stage("Unit and Integration Tests") {
             steps {
-                echo 'JUnit test for code function.'
-                echo 'Integration Test working together.'
+                echo 'Running JUnit tests and Integration Tests.'
             }
-            // post{ 
-            //     success{
-            //         mail to: "zaeem.r2021@gmail.com",
-            //         subject: "Success: JUnit and Integration test successful.",
-            //         body: "Stage is working."
-            //     }
-            //     failure{
-            //         mail to: "zaeem.r2021@gmail.com",
-            //         subject: "Unsuccess: JUnit and Integration test failure.",
-            //         body: "Stage is not working. Please try to test again."
-            //     }
-            // }
+            post { 
+                success {
+                    emailext(
+                        to: "zaeem.r2021@gmail.com",
+                        subject: "SUCCESS: Unit and Integration Tests Passed",
+                        body: "The Unit and Integration tests have passed successfully.",
+                        attachLog: true
+                    )
+                }
+                failure {
+                    emailext(
+                        to: "zaeem.r2021@gmail.com",
+                        subject: "FAILURE: Unit and Integration Tests Failed",
+                        body: "The Unit and Integration tests have failed. Please check the logs.",
+                        attachLog: true
+                    )
+                }
+            }
         }
 
         stage("Code Analysis") {
             steps {
-                echo 'Performing code analysis using SonarQube'
+                echo 'Performing code analysis using SonarQube.'
             }
         }
 
         stage("Security Scan") {
             steps {
-               echo 'Performing security scan using SonarQube'
+                echo 'Performing security scan using SonarQube.'
             }
-            // post{ 
-            //     success{
-            //         mail to: "zaeem.r2021@gmail.com",
-            //         subject: "Success: Security scans successful.",
-            //         body: "Scan is secure."
-            //     }
-            //     failure{
-            //         mail to: "zaeem.r2021@gmail.com",
-            //         subject: "Unsuccess: Security scans failure.",
-            //         body: "Scan is not secure. Please try to protect application."
-            //     }
-            // }
+            post { 
+                success {
+                    emailext(
+                        to: "zaeem.r2021@gmail.com",
+                        subject: "SUCCESS: Security Scan Passed",
+                        body: "The security scan has passed successfully.",
+                        attachLog: true
+                    )
+                }
+                failure {
+                    emailext(
+                        to: "zaeem.r2021@gmail.com",
+                        subject: "FAILURE: Security Scan Failed",
+                        body: "The security scan has failed. Please check the logs.",
+                        attachLog: true
+                    )
+                }
+            }
         }
 
         stage("Deploy to Staging") {
             steps {
-                echo 'Deploy to staging server AWS EC2 s3://staging-bucket/'
+                echo 'Deploying to staging server AWS EC2.'
             }
         }
 
         stage("Integration Tests on Staging") {
             steps {
-                echo 'Run Integration Tests on Staging environment'
+                echo 'Running Integration Tests on Staging environment.'
             }
         }
 
         stage("Deploy to Production") {
             steps {
-                echo 'Deploy to Production server AWS EC2'
+                echo 'Deploying to Production server AWS EC2.'
             }
         }
     }
