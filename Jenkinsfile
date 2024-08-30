@@ -6,7 +6,7 @@ pipeline {
             steps {
                 echo 'Building project to compile and package using Maven.'
             }
-        }
+        } // made changes
 
         stage("Unit and Integration Tests") {
             steps {
